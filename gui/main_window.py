@@ -1,6 +1,6 @@
 """
 Archivo: gui/main_window.py
-Ventana principal con sistema de pestañas y estilos centralizados
+Ventana principal con sistema de pestañas y cierre correcto de matplotlib
 """
 
 import tkinter as tk
@@ -19,7 +19,7 @@ from gui.windows.graficos import GraficosTab
 
 
 class MainWindow(tk.Tk):
-    """Ventana principal con pestañas"""
+    """Ventana principal con pestañas y auto-actualización"""
     
     def __init__(self, app):
         super().__init__()
@@ -35,6 +35,9 @@ class MainWindow(tk.Tk):
         self.title(Labels.APP_TITLE)
         self.geometry(f"{Dimensions.WINDOW_WIDTH}x{Dimensions.WINDOW_HEIGHT}")
         self.configure(bg=Colors.BG_SECONDARY)
+        
+        # Configurar cierre correcto de la aplicación
+        self.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         self.crear_interfaz()
         WindowConfig.center_window(self)
@@ -106,6 +109,26 @@ class MainWindow(tk.Tk):
         self.notebook.add(graficos_tab, text=Labels.TAB_GRAFICOS)
     
     def actualizar_analisis(self):
-        """Callback para actualizar todos los análisis"""
-        # Este método se llamará cuando cambien los datos
-        pass
+        """
+        Callback que se ejecuta cuando cambian los datos en Balance o Estado de Resultados.
+        Notifica a todas las pestañas de análisis para que se actualicen.
+        """
+        if hasattr(self.app, 'notify_data_change'):
+            self.app.notify_data_change()
+    
+    def on_closing(self):
+        """
+        Maneja el cierre correcto de la aplicación.
+        Cierra todas las figuras de matplotlib antes de cerrar la ventana.
+        """
+        try:
+            import matplotlib.pyplot as plt
+            plt.close('all')  # Cerrar todas las figuras abiertas
+        except Exception as e:
+            print(f"Error al cerrar figuras de matplotlib: {e}")
+        
+        try:
+            self.quit()      # Detener el mainloop de tkinter
+            self.destroy()   # Destruir la ventana
+        except Exception as e:
+            print(f"Error al cerrar la ventana: {e}")
