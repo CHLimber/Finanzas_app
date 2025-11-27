@@ -1,0 +1,14 @@
+# Archivo: requirements.txt
+# Dependencias del proyecto (compatibles con Python 3.13.x)
+
+# Tkinter ya viene incluido con Python
+
+# Gráficos
+matplotlib==3.9.2
+numpy==2.2.6
+
+# Análisis de datos (si en el futuro lo necesitas)
+pandas==2.2.3
+
+# Utilities
+python-dateutil==2.9.0.post0
