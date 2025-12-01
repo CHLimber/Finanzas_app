@@ -1,5 +1,14 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+import matplotlib
+matplotlib.rcParams.update({
+    'font.size': 10,
+    'axes.titlesize': 14,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+})
+
 
 def grafico_balance(activo_nc, activo_c, patrimonio, pasivo_nc, pasivo_c,anio):
 

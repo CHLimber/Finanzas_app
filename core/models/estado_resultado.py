@@ -4,32 +4,28 @@ Modelo de datos para el Estado de Resultados
 """
 
 class EstadoResultado:
-    """Modelo para almacenar datos del Estado de Resultados de 2 años"""
+    """Modelo para almacenar datos del Estado de Resultados de 2 anos"""
     
     def __init__(self):
-        # DATOS INGRESADOS MANUALMENTE
-        self.ingresos_servicios_y1 = 0.0
-        self.ingresos_servicios_y2 = 0.0
+        # DATOS ANO 1 (2023)
+        self.ingresos_servicios_y1 = 8500.0
+        self.costo_servicios_y1 = 3200.0
+        self.gastos_admin_y1 = 2100.0
+        self.gastos_ventas_y1 = 1200.0
+        self.depreciacion_amort_y1 = 400.0
+        self.gastos_financieros_y1 = 100.0
+        self.otros_ingresos_y1 = 50.0
         
-        self.costo_servicios_y1 = 0.0
-        self.costo_servicios_y2 = 0.0
-        
-        self.gastos_admin_y1 = 0.0
-        self.gastos_admin_y2 = 0.0
-        
-        self.gastos_ventas_y1 = 0.0
-        self.gastos_ventas_y2 = 0.0
-        
-        self.depreciacion_amort_y1 = 0.0
-        self.depreciacion_amort_y2 = 0.0
-        
-        self.gastos_financieros_y1 = 0.0
-        self.gastos_financieros_y2 = 0.0
-        
-        self.otros_ingresos_y1 = 0.0
-        self.otros_ingresos_y2 = 0.0
+        # DATOS ANO 2 (2024)
+        self.ingresos_servicios_y2 = 11200.0
+        self.costo_servicios_y2 = 4100.0
+        self.gastos_admin_y2 = 2600.0
+        self.gastos_ventas_y2 = 1400.0
+        self.depreciacion_amort_y2 = 500.0
+        self.gastos_financieros_y2 = 150.0
+        self.otros_ingresos_y2 = 100.0
     
-    # MÉTODOS DE CÁLCULO AUTOMÁTICO
+    # METODOS DE CALCULO AUTOMATICO
     
     def get_ganancia_bruta(self, year):
         """Calcula Ganancia Bruta"""

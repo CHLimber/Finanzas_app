@@ -1,11 +1,11 @@
 """
 Archivo: core/analysis/equilibrio_patrimonial.py
-Análisis de Equilibrio Patrimonial y Fondo de Maniobra para 2 años
+Analisis de Equilibrio Patrimonial y Fondo de Maniobra para 2 anos
 """
 
 class EquilibrioPatrimonial:
     """
-    Analiza el equilibrio patrimonial de un año específico.
+    Analiza el equilibrio patrimonial de un ano especifico.
     Determina si la estructura financiera es estable, inestable o nula.
     """
     
@@ -13,11 +13,11 @@ class EquilibrioPatrimonial:
                  pasivo_corriente, pasivo_no_corriente, patrimonio):
         """
         Args:
-            activo_corriente: Activo corriente del año
-            activo_no_corriente: Activo no corriente del año
-            pasivo_corriente: Pasivo corriente del año
-            pasivo_no_corriente: Pasivo no corriente del año
-            patrimonio: Patrimonio neto del año
+            activo_corriente: Activo corriente del ano
+            activo_no_corriente: Activo no corriente del ano
+            pasivo_corriente: Pasivo corriente del ano
+            pasivo_no_corriente: Pasivo no corriente del ano
+            patrimonio: Patrimonio neto del ano
         """
         self.AC = activo_corriente
         self.ANC = activo_no_corriente
@@ -37,10 +37,10 @@ class EquilibrioPatrimonial:
     
     def fondo_maniobra(self):
         """
-        Calcula el Fondo de Maniobra como RATIO (para interpretación).
+        Calcula el Fondo de Maniobra como RATIO (para interpretacion).
         FM Ratio = (AC - PC) / Activo Total
         
-        IMPORTANTE: Este ratio es el que se usa para la interpretación
+        IMPORTANTE: Este ratio es el que se usa para la interpretacion
         con los rangos (0.10 - 0.30) del FinancialInterpreter.
         
         Returns:
@@ -62,27 +62,17 @@ class EquilibrioPatrimonial:
     
     def financiacion_permanente(self):
         """
-        Calcula la Financiación Permanente.
+        Calcula la Financiacion Permanente.
         FP = Patrimonio + Pasivo No Corriente
         
         Returns:
-            float: Financiación Permanente
-        """
-        return self.PAT + self.PNC
-    
-    def financiacion_permanente(self):
-        """
-        Calcula la Financiación Permanente.
-        FP = Patrimonio + Pasivo No Corriente
-        
-        Returns:
-            float: Financiación Permanente
+            float: Financiacion Permanente
         """
         return self.PAT + self.PNC
     
     def tipo_equilibrio(self):
         """
-        Determina el tipo de equilibrio patrimonial según la estructura financiera.
+        Determina el tipo de equilibrio patrimonial segun la estructura financiera.
         
         Returns:
             str: Tipo de equilibrio ('estable', 'inestable', 'nulo')
@@ -98,27 +88,27 @@ class EquilibrioPatrimonial:
     
     def descripcion_equilibrio(self):
         """
-        Devuelve una descripción detallada del equilibrio patrimonial.
+        Devuelve una descripcion detallada del equilibrio patrimonial.
         
         Returns:
-            str: Descripción completa del tipo de equilibrio
+            str: Descripcion completa del tipo de equilibrio
         """
         tipo = self.tipo_equilibrio()
         fp = self.financiacion_permanente()
         
         descripciones = {
-            "estable": f"Equilibrio patrimonial ESTABLE: La financiación permanente ({fp:,.2f}) es mayor que el activo no corriente ({self.ANC:,.2f}), lo que indica que la empresa financia sus activos fijos con recursos a largo plazo y tiene un fondo de maniobra positivo.",
+            "estable": f"Equilibrio patrimonial ESTABLE: La financiacion permanente ({fp:,.2f}) es mayor que el activo no corriente ({self.ANC:,.2f}), lo que indica que la empresa financia sus activos fijos con recursos a largo plazo y tiene un fondo de maniobra positivo.",
             
-            "inestable": f"Equilibrio patrimonial INESTABLE: La financiación permanente ({fp:,.2f}) es menor que el activo no corriente ({self.ANC:,.2f}), lo que significa que parte del activo no corriente se está financiando con pasivos a corto plazo. Esto representa un riesgo de liquidez.",
+            "inestable": f"Equilibrio patrimonial INESTABLE: La financiacion permanente ({fp:,.2f}) es menor que el activo no corriente ({self.ANC:,.2f}), lo que significa que parte del activo no corriente se esta financiando con pasivos a corto plazo. Esto representa un riesgo de liquidez.",
             
-            "nulo": f"Equilibrio patrimonial NULO: La financiación permanente ({fp:,.2f}) es exactamente igual al activo no corriente ({self.ANC:,.2f}), lo que indica que todo el activo fijo está financiado con recursos permanentes, pero sin margen de seguridad (FM = 0)."
+            "nulo": f"Equilibrio patrimonial NULO: La financiacion permanente ({fp:,.2f}) es exactamente igual al activo no corriente ({self.ANC:,.2f}), lo que indica que todo el activo fijo esta financiado con recursos permanentes, pero sin margen de seguridad (FM = 0)."
         }
         
         return descripciones[tipo]
     
     def tipo_equilibrio_por_fm(self):
         """
-        Determina el equilibrio según el Fondo de Maniobra ABSOLUTO.
+        Determina el equilibrio segun el Fondo de Maniobra ABSOLUTO.
         
         Returns:
             str: Tipo de equilibrio basado en FM absoluto
@@ -134,10 +124,10 @@ class EquilibrioPatrimonial:
     
     def analizar(self):
         """
-        Devuelve análisis completo del equilibrio patrimonial.
+        Devuelve analisis completo del equilibrio patrimonial.
         
         Returns:
-            dict: Diccionario con todos los análisis
+            dict: Diccionario con todos los analisis
         """
         fm_abs = self.fondo_maniobra_absoluto()
         fm_ratio = self.fondo_maniobra()
@@ -160,31 +150,31 @@ class EquilibrioPatrimonial:
     
     def diagnostico_completo(self):
         """
-        Genera un diagnóstico completo con recomendaciones.
+        Genera un diagnostico completo con recomendaciones.
         
         Returns:
-            dict: Diagnóstico con interpretación y recomendaciones
+            dict: Diagnostico con interpretacion y recomendaciones
         """
         fm_abs = self.fondo_maniobra_absoluto()
         fm_ratio = self.fondo_maniobra()
         tipo = self.tipo_equilibrio()
         
-        # Interpretación según tipo
+        # Interpretacion segun tipo
         interpretaciones = {
-            "estable": "La empresa tiene una estructura financiera sólida. Los activos no corrientes están financiados con recursos permanentes y existe un colchón de seguridad para las operaciones diarias.",
+            "estable": "La empresa tiene una estructura financiera solida. Los activos no corrientes estan financiados con recursos permanentes y existe un colchon de seguridad para las operaciones diarias.",
             
             "inestable": "La empresa presenta riesgos de liquidez estructural. Parte de los activos fijos se financian con deuda de corto plazo, lo que puede generar problemas para renovar esos pasivos.",
             
-            "nulo": "La empresa está en un punto crítico. Aunque los activos fijos están correctamente financiados, no existe margen de maniobra para imprevistos operativos."
+            "nulo": "La empresa esta en un punto critico. Aunque los activos fijos estan correctamente financiados, no existe margen de maniobra para imprevistos operativos."
         }
         
-        # Recomendaciones según tipo
+        # Recomendaciones segun tipo
         recomendaciones = {
             "estable": "Mantener la estructura actual. Considerar optimizar el exceso de FM si existe para mejorar rentabilidad, pero sin comprometer la estabilidad.",
             
-            "inestable": "URGENTE: Reestructurar la deuda a largo plazo o realizar una ampliación de capital. Reducir activos no corrientes o refinanciar pasivos corrientes a largo plazo.",
+            "inestable": "URGENTE: Reestructurar la deuda a largo plazo o realizar una ampliacion de capital. Reducir activos no corrientes o refinanciar pasivos corrientes a largo plazo.",
             
-            "nulo": "Aumentar la financiación permanente mediante retención de beneficios, ampliación de capital o contratación de deuda a largo plazo para crear un colchón de seguridad."
+            "nulo": "Aumentar la financiacion permanente mediante retencion de beneficios, ampliacion de capital o contratacion de deuda a largo plazo para crear un colchon de seguridad."
         }
         
         return {
@@ -199,51 +189,54 @@ class EquilibrioPatrimonial:
 
 class AnalisisFondoManiobraDual:
     """
-    Analiza el Fondo de Maniobra comparativo entre dos años.
-    Identifica evolución y cambios en el equilibrio patrimonial.
+    Analiza el Fondo de Maniobra comparativo entre dos anos.
+    Identifica evolucion y cambios en el equilibrio patrimonial.
+    
+    IMPORTANTE: Usa valores ABSOLUTOS del FM para la evolucion,
+    ya que es mas intuitivo y representa el capital de trabajo real.
     """
     
-    def __init__(self, fm_ano1, fm_ano2):
+    def __init__(self, fm1, fm2):
         """
         Args:
-            fm_ano1: Fondo de Maniobra del Año 1
-            fm_ano2: Fondo de Maniobra del Año 2
+            fm1: Fondo de Maniobra ABSOLUTO del ano 1
+            fm2: Fondo de Maniobra ABSOLUTO del ano 2
         """
-        self.fm1 = fm_ano1
-        self.fm2 = fm_ano2
+        self.fm1 = fm1
+        self.fm2 = fm2
     
-    def tipo_equilibrio(self, valor):
+    def tipo_equilibrio(self, fm):
         """
-        Retorna el tipo de equilibrio patrimonial según el FM.
+        Determina el tipo de equilibrio segun el valor del FM.
         
         Args:
-            valor: Valor del Fondo de Maniobra
+            fm: Valor del FM (absoluto)
             
         Returns:
             str: Tipo de equilibrio
         """
-        if valor > 0:
-            return "Equilibrio patrimonial estable (FM > 0)"
-        elif valor < 0:
-            return "Desequilibrio patrimonial inestable (FM < 0)"
+        if fm > 0:
+            return "positivo"
+        elif fm < 0:
+            return "negativo"
         else:
-            return "Equilibrio patrimonial nulo (FM = 0)"
+            return "nulo"
     
     def variacion_absoluta(self):
         """
-        Calcula la variación absoluta del FM entre años.
+        Calcula la variacion absoluta del FM entre anos.
         
         Returns:
-            float: Diferencia en unidades monetarias
+            float: Variacion en unidades monetarias
         """
         return self.fm2 - self.fm1
     
     def variacion_porcentual(self):
         """
-        Calcula la variación porcentual del FM entre años.
+        Calcula la variacion porcentual del FM entre anos.
         
         Returns:
-            float: Variación en porcentaje
+            float: Variacion en porcentaje
         """
         if self.fm1 == 0:
             return float('inf') if self.fm2 > 0 else float('-inf')
@@ -265,47 +258,47 @@ class AnalisisFondoManiobraDual:
     
     def descripcion_evolucion(self):
         """
-        Genera una descripción detallada de la evolución del FM.
+        Genera una descripcion detallada de la evolucion del FM.
         
         Returns:
-            str: Descripción de la evolución
+            str: Descripcion de la evolucion
         """
         variacion = self.variacion_absoluta()
         var_pct = self.variacion_porcentual()
         tendencia = self.tendencia()
         
         if tendencia == "mejora":
-            return f"El Fondo de Maniobra AUMENTÓ en {variacion:,.2f} unidades ({var_pct:+.2f}%), mostrando una mejora en la liquidez estructural. La empresa ha fortalecido su capacidad para financiar operaciones con recursos propios."
+            return f"El Fondo de Maniobra AUMENTO de {self.fm1:,.2f} a {self.fm2:,.2f} ({variacion:+,.2f} unidades, {var_pct:+.2f}%), mostrando una mejora en la liquidez estructural. La empresa ha fortalecido su capacidad para financiar operaciones con recursos propios."
         
         elif tendencia == "deterioro":
-            return f"El Fondo de Maniobra DISMINUYÓ en {abs(variacion):,.2f} unidades ({var_pct:.2f}%), indicando un deterioro en la liquidez estructural. Se requiere atención para evitar problemas de solvencia a corto plazo."
+            return f"El Fondo de Maniobra DISMINUYO de {self.fm1:,.2f} a {self.fm2:,.2f} ({variacion:,.2f} unidades, {var_pct:.2f}%), indicando un deterioro en la liquidez estructural. Se requiere atencion para evitar problemas de solvencia a corto plazo."
         
         else:
-            return f"El Fondo de Maniobra se MANTUVO CONSTANTE en {self.fm1:,.2f} unidades entre ambos años, sin cambios significativos en la estructura de capital de trabajo."
+            return f"El Fondo de Maniobra se MANTUVO CONSTANTE en {self.fm1:,.2f} unidades entre ambos anos, sin cambios significativos en la estructura de capital de trabajo."
     
     def cambio_situacion(self):
         """
-        Identifica si hubo cambio en la situación de equilibrio entre años.
+        Identifica si hubo cambio en la situacion de equilibrio entre anos.
         
         Returns:
-            dict: Información sobre cambios de situación
+            dict: Informacion sobre cambios de situacion
         """
-        tipo1 = "positivo" if self.fm1 > 0 else ("negativo" if self.fm1 < 0 else "nulo")
-        tipo2 = "positivo" if self.fm2 > 0 else ("negativo" if self.fm2 < 0 else "nulo")
+        tipo1 = self.tipo_equilibrio(self.fm1)
+        tipo2 = self.tipo_equilibrio(self.fm2)
         
         cambio = tipo1 != tipo2
         
         if cambio:
             if tipo1 == "negativo" and tipo2 == "positivo":
-                mensaje = "¡MEJORA SIGNIFICATIVA! La empresa pasó de FM negativo a positivo, recuperando el equilibrio patrimonial."
+                mensaje = "MEJORA SIGNIFICATIVA: La empresa paso de FM negativo a positivo, recuperando el equilibrio patrimonial."
             elif tipo1 == "positivo" and tipo2 == "negativo":
-                mensaje = "¡ALERTA! La empresa pasó de FM positivo a negativo, entrando en desequilibrio patrimonial."
+                mensaje = "ALERTA: La empresa paso de FM positivo a negativo, entrando en desequilibrio patrimonial."
             elif tipo1 == "nulo":
-                mensaje = f"La empresa salió de la situación límite (FM = 0) hacia un FM {tipo2}."
+                mensaje = f"La empresa salio de la situacion limite (FM = 0) hacia un FM {tipo2}."
             else:
-                mensaje = f"La empresa alcanzó un equilibrio límite (FM = 0) desde un FM {tipo1}."
+                mensaje = f"La empresa alcanzo un equilibrio limite (FM = 0) desde un FM {tipo1}."
         else:
-            mensaje = f"La empresa mantiene su situación de FM {tipo1} en ambos años."
+            mensaje = f"La empresa mantiene su situacion de FM {tipo1} en ambos anos."
         
         return {
             "hubo_cambio": cambio,
@@ -316,11 +309,11 @@ class AnalisisFondoManiobraDual:
     
     def analizar(self):
         """
-        Devuelve: evolución del FM y tipo de equilibrio patrimonial
-        para cada año + conclusión.
+        Devuelve: evolucion del FM y tipo de equilibrio patrimonial
+        para cada ano + conclusion.
         
         Returns:
-            dict: Análisis completo comparativo
+            dict: Analisis completo comparativo
         """
         return {
             "fm_ano1": self.fm1,
@@ -336,10 +329,10 @@ class AnalisisFondoManiobraDual:
     
     def diagnostico_comparativo(self):
         """
-        Genera un diagnóstico comparativo completo con recomendaciones.
+        Genera un diagnostico comparativo completo con recomendaciones.
         
         Returns:
-            dict: Diagnóstico comparativo
+            dict: Diagnostico comparativo
         """
         tendencia = self.tendencia()
         cambio = self.cambio_situacion()
@@ -358,15 +351,15 @@ class AnalisisFondoManiobraDual:
             nivel_alerta = "NORMAL"
             prioridad = "baja"
         
-        # Recomendación
+        # Recomendacion
         if nivel_alerta == "CRITICO":
-            recomendacion = "Acción inmediata requerida: Reestructurar deuda, ampliar capital o reducir activos no corrientes para restaurar el equilibrio."
+            recomendacion = "Accion inmediata requerida: Reestructurar deuda, ampliar capital o reducir activos no corrientes para restaurar el equilibrio."
         elif nivel_alerta == "ADVERTENCIA":
             recomendacion = "Monitorear de cerca la tendencia. Considerar medidas preventivas para evitar el deterioro continuo del FM."
         elif nivel_alerta == "RECUPERACION":
-            recomendacion = "Excelente evolución. Mantener la disciplina financiera que permitió la recuperación del equilibrio."
+            recomendacion = "Excelente evolucion. Mantener la disciplina financiera que permitio la recuperacion del equilibrio."
         else:
-            recomendacion = "Continuar con la gestión actual del capital de trabajo, manteniendo la estabilidad alcanzada."
+            recomendacion = "Continuar con la gestion actual del capital de trabajo, manteniendo la estabilidad alcanzada."
         
         return {
             "nivel_alerta": nivel_alerta,
@@ -380,8 +373,8 @@ class AnalisisFondoManiobraDual:
 
 class AnalisisPatrimonialCompleto:
     """
-    Clase que integra el análisis completo de equilibrio patrimonial
-    para ambos años usando los modelos de Balance.
+    Clase que integra el analisis completo de equilibrio patrimonial
+    para ambos anos usando los modelos de Balance.
     """
     
     def __init__(self, balance_model):
@@ -391,15 +384,15 @@ class AnalisisPatrimonialCompleto:
         """
         self.balance = balance_model
     
-    def analizar_año(self, year):
+    def analizar_ano(self, year):
         """
-        Analiza el equilibrio patrimonial de un año específico.
+        Analiza el equilibrio patrimonial de un ano especifico.
         
         Args:
             year: 1 o 2
             
         Returns:
-            EquilibrioPatrimonial: Instancia con el análisis del año
+            EquilibrioPatrimonial: Instancia con el analisis del ano
         """
         ac = self.balance.get_total_corriente(year)
         anc = self.balance.get_total_no_corriente(year)
@@ -411,22 +404,25 @@ class AnalisisPatrimonialCompleto:
     
     def analisis_dual(self):
         """
-        Realiza el análisis comparativo entre ambos años.
+        Realiza el analisis comparativo entre ambos anos.
+        
+        CORRECCION: Ahora usa FM ABSOLUTO para la evolucion,
+        que es lo correcto para mostrar el cambio real en el capital de trabajo.
         
         Returns:
-            dict: Análisis completo de ambos años y comparación
+            dict: Analisis completo de ambos anos y comparacion
         """
-        # Análisis individual de cada año
-        eq_y1 = self.analizar_año(1)
-        eq_y2 = self.analizar_año(2)
+        # Analisis individual de cada ano
+        eq_y1 = self.analizar_ano(1)
+        eq_y2 = self.analizar_ano(2)
         
         analisis_y1 = eq_y1.analizar()
         analisis_y2 = eq_y2.analizar()
         
-        # Análisis comparativo de FM
+        # Analisis comparativo de FM usando valores ABSOLUTOS (CORREGIDO)
         fm_dual = AnalisisFondoManiobraDual(
-            analisis_y1["fondo_maniobra_ratio"],
-            analisis_y2["fondo_maniobra_ratio"]
+            analisis_y1["fondo_maniobra_absoluto"],  # <-- CORREGIDO: Usar absoluto
+            analisis_y2["fondo_maniobra_absoluto"]   # <-- CORREGIDO: Usar absoluto
         )
         
         comparacion = fm_dual.analizar()

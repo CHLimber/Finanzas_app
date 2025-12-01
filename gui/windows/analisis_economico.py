@@ -6,6 +6,11 @@ Pestaña de Análisis Financiero - Liquidez - Solvencia
 import tkinter as tk
 from tkinter import ttk
 from config import Colors, Fonts
+from gui.windows.c1_rat import C1RATTab
+from gui.windows.c2_rrp import C2RRPTab 
+from gui.windows.c3_dupont import C3DuPontTab
+from gui.windows.c4_margenes import C4MargenesTab
+from gui.windows.c5_apalancamiento import C5ApalancamientoTab
 
 class AnalisisEconomicoTab(ttk.Frame):
     """Pestaña con subpestañas de Análisis Financiero"""
@@ -73,9 +78,21 @@ class AnalisisEconomicoTab(ttk.Frame):
         self.sub_notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         # Crear subpestañas (adaptar según cada análisis)
-        self.crear_subpestana_c1_c2_c3()
-        self.crear_subpestana_c4_c5()
-        
+        c1_tab = C1RATTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(c1_tab, text="C1. Rentabilidad Económica (RAT)")
+
+        c2_tab = C2RRPTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(c2_tab, text="C2 - RRP")
+
+        c3_tab = C3DuPontTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(c3_tab, text="C3 - DuPont")
+
+        c4_tab = C4MargenesTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(c4_tab, text="C4 - Márgenes")
+    
+        c5_tab = C5ApalancamientoTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(c5_tab, text="C5 - Apalancamiento")
+
         # Marcar como actualizado
         self.datos_desactualizados = False
         if self.label_estado:
@@ -101,26 +118,3 @@ class AnalisisEconomicoTab(ttk.Frame):
         except Exception as e:
             print(f"❌ Error: {e}")
     
-    def crear_subpestana_c1_c2_c3(self):
-        """Subpestaña B1, B2 y B3"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="C1 - C2 - C3")
-        
-        content = ttk.Label(
-            tab,
-            text="C1, C2 y C3\n(Análisis de Liquidez)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)
-    
-    def crear_subpestana_c4_c5(self):
-        """Subpestaña B4 y B5"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="C4 - C5")
-        
-        content = ttk.Label(
-            tab,
-            text="C4 y C5\n(Análisis de Económico)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)

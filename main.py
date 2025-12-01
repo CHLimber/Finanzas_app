@@ -18,6 +18,7 @@ class FinancialAnalysisApp:
         
         # Sistema de callbacks para notificar cambios de datos
         self.on_data_change_callbacks = []
+
         
     def start(self):
         """Inicia la aplicación con la ventana principal"""

@@ -71,14 +71,14 @@ class RatioCalculator:
         """
         Razón de Tesorería = (Activo Corriente - Existencias) / Pasivo Corriente
         """
-        activo_corriente = self.balance.get_total_corriente(year)
-        existencias = self.balance.existencias_y1 if year == 1 else self.balance.existencias_y2
+        efectivo = self.balance.caja_bancos_y1 if year == 1 else self.balance.caja_bancos_y2
+        cuentas_cobrar = self.balance.clientes_cobrar_y1 if year == 1 else self.balance.clientes_cobrar_y2
         pasivo_corriente = self.balance.get_total_pasivo_corriente(year)
         
         if pasivo_corriente == 0:
             return float('inf')
         
-        return (activo_corriente - existencias) / pasivo_corriente
+        return (efectivo + cuentas_cobrar) / pasivo_corriente
     
     def calcular_razon_disponibilidad(self, year):
         """

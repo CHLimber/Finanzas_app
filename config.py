@@ -2,6 +2,8 @@
 Archivo: config.py
 Configuración global, estilos y constantes de la aplicación
 """
+import tkinter as tk
+from tkinter import ttk  
 
 # ============================================================
 # COLORES
@@ -54,12 +56,20 @@ class Fonts:
     FAMILY_MONO = "Courier New"
     
     # Tamaños
-    SIZE_TITLE = 18              # Títulos principales
-    SIZE_SUBTITLE = 14           # Subtítulos
-    SIZE_HEADER = 12             # Encabezados
-    SIZE_NORMAL = 10             # Texto normal
-    SIZE_SMALL = 9               # Texto pequeño
-    SIZE_LARGE = 16              # Texto grande
+    SIZE_TITLE = 22              # Títulos principales
+    SIZE_SUBTITLE = 18          # Subtítulos
+    SIZE_HEADER = 16             # Encabezados
+    SIZE_NORMAL = 15             # Texto normal
+    SIZE_SMALL = 14               # Texto pequeño
+    SIZE_LARGE = 19              # Texto grande
+
+    SIZE_TABLE_HEADER = 15    # Headers de tabla
+    SIZE_TABLE_NORMAL = 14    # Contenido de tabla
+    SIZE_TABLE_SMALL = 13     # Texto pequeño en tablas
+
+    TABLE_HEADER = ("Arial", SIZE_TABLE_HEADER, "bold")
+    TABLE_NORMAL = ("Arial", SIZE_TABLE_NORMAL)
+    TABLE_SMALL = ("Arial", SIZE_TABLE_SMALL)
     
     # Fuentes completas (familia, tamaño, peso)
     TITLE = (FAMILY, SIZE_TITLE, "bold")
@@ -95,6 +105,22 @@ class Dimensions:
     
     # Header
     HEADER_HEIGHT = 80
+
+    TEXT_HEIGHT_SHORT = 3
+    TEXT_HEIGHT_MEDIUM = 4
+    TEXT_HEIGHT_LONG = 5
+    
+    # Anchos para tablas (ajustados para fuentes grandes)
+    TABLE_COL_CONCEPT = 18      # Columna de conceptos
+    TABLE_COL_VALUE = 12        # Columnas de valores
+    TABLE_COL_VARIATION = 10    # Columna de variación
+    TABLE_LABEL_SHORT = 20      # Labels cortos
+    TABLE_LABEL_MEDIUM = 25 
+
+    TABLE_ROW_HEIGHT = 30        # Altura de fila de tabla
+    TABLE_HEADER_HEIGHT = 35     # Altura de header de tabla
+    TABLE_PADDING_X = 8          # Padding horizontal en celdas
+    TABLE_PADDING_Y = 5          # Padding vertical en celdas
 
 
 # ============================================================
@@ -352,3 +378,34 @@ def create_styled_entry(parent, width=Dimensions.ENTRY_WIDTH, **kwargs):
         **kwargs
     )
     return entry
+
+def configurar_estilos_tablas():
+    """Configura estilos de Treeview para tablas"""
+    style = ttk.Style()
+    
+    # Configurar Treeview
+    style.configure(
+        "Treeview",
+        font=Fonts.TABLE_NORMAL,
+        rowheight=Dimensions.TABLE_ROW_HEIGHT,  # ✅ Altura de fila
+        background=Colors.BG_PRIMARY,
+        foreground="black",
+        fieldbackground=Colors.BG_PRIMARY
+    )
+    
+    # Configurar Headers de Treeview
+    style.configure(
+        "Treeview.Heading",
+        font=Fonts.TABLE_HEADER,
+        background=Colors.BG_SECONDARY,
+        foreground="black",
+        relief="raised",
+        padding=(Dimensions.TABLE_PADDING_X, Dimensions.TABLE_PADDING_Y)
+    )
+    
+    # Configurar cuando el mouse pasa sobre las filas
+    style.map(
+        "Treeview",
+        background=[("selected", Colors.INFO)],
+        foreground=[("selected", "white")]
+    )

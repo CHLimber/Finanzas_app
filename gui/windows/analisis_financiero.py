@@ -1,14 +1,22 @@
 """
 Archivo: gui/windows/analisis_financiero.py
-Pestaña de Análisis Financiero - Liquidez - Solvencia
+Pestaña principal de Análisis Financiero con 5 sub-pestañas separadas
 """
 
 import tkinter as tk
 from tkinter import ttk
 from config import Colors, Fonts
 
+# Importar las pestañas individuales
+from gui.windows.b1_liquidez import B1LiquidezTab
+from gui.windows.b2_solvencia import B2SolvenciaTab
+from gui.windows.b3_comparativa import B3ComparativaTab
+from gui.windows.b4_estructura import B4EstructuraTab
+from gui.windows.b5_estres import B5EstresTab
+
+
 class AnalisisFinancieroTab(ttk.Frame):
-    """Pestaña con subpestañas de Análisis Financiero"""
+    """Pestaña principal de Análisis Financiero"""
     
     def __init__(self, parent, app):
         super().__init__(parent)
@@ -38,7 +46,7 @@ class AnalisisFinancieroTab(ttk.Frame):
         # Título
         ttk.Label(
             titulo_frame,
-            text="ANÁLISIS FINANCIERO",  # Cambiar según pestaña
+            text="ANÁLISIS FINANCIERO",
             font=Fonts.TITLE
         ).pack(side=tk.LEFT, padx=10)
         
@@ -68,18 +76,50 @@ class AnalisisFinancieroTab(ttk.Frame):
         )
         self.btn_actualizar.pack(side=tk.RIGHT, padx=10)
         
-        # Notebook secundario
+        # Notebook para las 5 pestañas
         self.sub_notebook = ttk.Notebook(self)
         self.sub_notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
-        # Crear subpestañas (adaptar según cada análisis)
-        self.crear_subpestana_b1_b2_b3()
-        self.crear_subpestana_b4_b5()
+        # Crear las 5 pestañas separadas
+        self.crear_pestanas()
         
         # Marcar como actualizado
         self.datos_desactualizados = False
         if self.label_estado:
             self.label_estado.pack_forget()
+    
+    def crear_pestanas(self):
+        """Crea las 5 pestañas del análisis financiero"""
+        
+        # B1 - Ratios de Liquidez
+        b1_tab = B1LiquidezTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(b1_tab, text="B1 - Liquidez")
+        
+        # B2 - Ratios de Solvencia
+        b2_tab = B2SolvenciaTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(b2_tab, text="B2 - Solvencia")
+        
+        # B3 - Placeholder (implementar después)
+        b3_tab = B3ComparativaTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(b3_tab, text="B3 - Comparativa")
+        
+        # B4 - Placeholder (implementar después)
+        b4_tab = B4EstructuraTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(b4_tab, text="B4 - Estructura")
+        
+        # B5 - Placeholder (implementar después)
+        b5_tab = B5EstresTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(b5_tab, text="B5 - Estrés Financiero")
+    
+    def _crear_placeholder(self, nombre):
+        """Crea una pestaña placeholder"""
+        tab = ttk.Frame(self.sub_notebook)
+        ttk.Label(
+            tab,
+            text=f"{nombre}\n(En desarrollo)",
+            font=Fonts.SUBTITLE
+        ).pack(expand=True)
+        return tab
     
     def marcar_desactualizado(self):
         """Marca que hay datos nuevos"""
@@ -97,30 +137,6 @@ class AnalisisFinancieroTab(ttk.Frame):
             plt.close('all')
             
             self.crear_interfaz()
-            print("✅ Análisis actualizado")
+            print("✅ Análisis Financiero actualizado")
         except Exception as e:
             print(f"❌ Error: {e}")
-    
-    def crear_subpestana_b1_b2_b3(self):
-        """Subpestaña B1, B2 y B3"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="B1 - B2 - B3")
-        
-        content = ttk.Label(
-            tab,
-            text="B1, B2 y B3\n(Análisis de Liquidez)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)
-    
-    def crear_subpestana_b4_b5(self):
-        """Subpestaña B4 y B5"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="B4 - B5")
-        
-        content = ttk.Label(
-            tab,
-            text="B4 y B5\n(Análisis de Solvencia)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)

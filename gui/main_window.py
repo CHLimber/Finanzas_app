@@ -15,7 +15,8 @@ from gui.windows.analisis_patrimonial import AnalisisPatrimonialTab
 from gui.windows.analisis_financiero import AnalisisFinancieroTab
 from gui.windows.analisis_economico import AnalisisEconomicoTab
 from gui.windows.analisis_integral_diagnostico import AnalisisIntegralTab
-from gui.windows.graficos import GraficosTab
+from gui.windows.graficos import GraficosWindow
+from config import configurar_estilos_tablas
 
 
 class MainWindow(tk.Tk):
@@ -38,6 +39,9 @@ class MainWindow(tk.Tk):
         
         # Configurar cierre correcto de la aplicación
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
+        
+        
+        configurar_estilos_tablas()
         
         self.crear_interfaz()
         WindowConfig.center_window(self)
@@ -105,7 +109,7 @@ class MainWindow(tk.Tk):
         self.notebook.add(integral_tab, text=Labels.TAB_INTEGRAL)
         
         # 7. Gráficos
-        graficos_tab = GraficosTab(self.notebook, self.app)
+        graficos_tab = GraficosWindow(self.notebook, self.app)
         self.notebook.add(graficos_tab, text=Labels.TAB_GRAFICOS)
     
     def actualizar_analisis(self):

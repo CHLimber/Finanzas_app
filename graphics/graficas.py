@@ -1,5 +1,14 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib
+matplotlib.rcParams.update({
+    'font.size': 10,
+    'axes.titlesize': 14,
+    'axes.labelsize': 12,
+    'xtick.labelsize': 10,
+    'ytick.labelsize': 10,
+})
+
 
 def grafico_analisis_financiero(datos_año1, datos_año2, año1="Año 1", año2="Año 2"):
     """

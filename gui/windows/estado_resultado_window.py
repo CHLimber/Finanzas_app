@@ -5,6 +5,8 @@ Pestaña del Estado de Resultados con cálculo automático
 
 import tkinter as tk
 from tkinter import ttk
+from config import Colors, Fonts  # ✅ Importar config
+
 
 class EstadoResultadoTab(ttk.Frame):
     """Pestaña para el Estado de Resultados con cálculo automático"""
@@ -24,9 +26,9 @@ class EstadoResultadoTab(ttk.Frame):
         """Crea la interfaz del estado de resultados"""
         
         # Canvas con scrollbar
-        canvas = tk.Canvas(self)
+        canvas = tk.Canvas(self, bg=Colors.BG_PRIMARY)  # ✅ Añadir bg
         scrollbar = ttk.Scrollbar(self, orient="vertical", command=canvas.yview)
-        scrollable_frame = ttk.Frame(canvas)
+        scrollable_frame = tk.Frame(canvas, bg=Colors.BG_PRIMARY)  # ✅ tk.Frame con bg
         
         scrollable_frame.bind(
             "<Configure>",
@@ -37,17 +39,21 @@ class EstadoResultadoTab(ttk.Frame):
         canvas.configure(yscrollcommand=scrollbar.set)
         
         # Título
-        titulo = ttk.Label(scrollable_frame, 
+        titulo = tk.Label(scrollable_frame,  # ✅ tk.Label
                           text="ESTADO DE RESULTADOS (en miles de Bs.)", 
-                          font=("Arial", 18, "bold"))
+                          font=Fonts.TITLE,  # ✅ Usar Fonts.TITLE
+                          bg=Colors.BG_PRIMARY)  # ✅ Añadir bg
         titulo.grid(row=0, column=0, columnspan=3, pady=15)
         
         # Encabezados
-        ttk.Label(scrollable_frame, text="Concepto", font=("Arial", 11, "bold")).grid(
+        tk.Label(scrollable_frame, text="Concepto",  # ✅ tk.Label
+                 font=Fonts.HEADER, bg=Colors.BG_PRIMARY).grid(
             row=1, column=0, padx=15, pady=8, sticky="w")
-        ttk.Label(scrollable_frame, text="Año 1", font=("Arial", 11, "bold")).grid(
+        tk.Label(scrollable_frame, text="Año 1",  # ✅ tk.Label
+                 font=Fonts.HEADER, bg=Colors.BG_PRIMARY).grid(
             row=1, column=1, padx=15, pady=8)
-        ttk.Label(scrollable_frame, text="Año 2", font=("Arial", 11, "bold")).grid(
+        tk.Label(scrollable_frame, text="Año 2",  # ✅ tk.Label
+                 font=Fonts.HEADER, bg=Colors.BG_PRIMARY).grid(
             row=1, column=2, padx=15, pady=8)
         
         row = 2
@@ -97,25 +103,26 @@ class EstadoResultadoTab(ttk.Frame):
         row = self.campo_calculado(scrollable_frame, "Impuestos a la renta (25%)", 
                                    "impuestos_renta", row)
         row = self.campo_calculado(scrollable_frame, "UTILIDAD NETA", 
-                                   "utilidad_neta", row, bold=True, color="darkblue", size=12)
+                                   "utilidad_neta", row, bold=True, color=Colors.INFO, size=12)
         
         canvas.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
     
     def campo_entrada(self, parent, label, field_y1, field_y2, row):
         """Campo de entrada con cálculo automático"""
-        ttk.Label(parent, text=label, font=("Arial", 10)).grid(
+        tk.Label(parent, text=label,  # ✅ tk.Label
+                 font=Fonts.NORMAL, bg=Colors.BG_PRIMARY).grid(
             row=row, column=0, sticky="w", padx=30, pady=3)
         
         # Entry Año 1
-        entry_y1 = ttk.Entry(parent, width=18, justify="right", font=("Arial", 10))
+        entry_y1 = ttk.Entry(parent, width=18, justify="right", font=Fonts.NORMAL)
         entry_y1.grid(row=row, column=1, padx=15, pady=3)
         entry_y1.insert(0, "0.00")
         entry_y1.bind("<KeyRelease>", lambda e: self.calcular_automatico())
         self.entries[field_y1] = entry_y1
         
         # Entry Año 2
-        entry_y2 = ttk.Entry(parent, width=18, justify="right", font=("Arial", 10))
+        entry_y2 = ttk.Entry(parent, width=18, justify="right", font=Fonts.NORMAL)
         entry_y2.grid(row=row, column=2, padx=15, pady=3)
         entry_y2.insert(0, "0.00")
         entry_y2.bind("<KeyRelease>", lambda e: self.calcular_automatico())
@@ -124,22 +131,26 @@ class EstadoResultadoTab(ttk.Frame):
         return row + 1
     
     def campo_calculado(self, parent, label, field_name, row, 
-                       bold=False, color="darkgreen", size=10):
+                       bold=False, color=Colors.SUCCESS, size=10):  # ✅ color por defecto
         """Campo calculado automáticamente"""
-        font = ("Arial", size, "bold") if bold else ("Arial", size)
+        font = Fonts.NORMAL_BOLD if bold else Fonts.NORMAL  # ✅ Usar Fonts
+        if size == 12:
+            font = Fonts.LARGE  # ✅ Para utilidad neta
         
-        ttk.Label(parent, text=label, font=font).grid(
+        tk.Label(parent, text=label, font=font, bg=Colors.BG_PRIMARY).grid(  # ✅ tk.Label
             row=row, column=0, sticky="w", padx=30, pady=3)
         
         # Label Año 1
         label_y1 = tk.Label(parent, text="0.00", font=font, 
-                           foreground=color, bg="white", width=18, anchor="e")
+                           foreground=color, bg=Colors.BG_SECONDARY,  # ✅ Usar Colors
+                           width=18, anchor="e")
         label_y1.grid(row=row, column=1, padx=15, pady=3)
         self.calculated_labels[f"{field_name}_y1"] = label_y1
         
         # Label Año 2
         label_y2 = tk.Label(parent, text="0.00", font=font, 
-                           foreground=color, bg="white", width=18, anchor="e")
+                           foreground=color, bg=Colors.BG_SECONDARY,  # ✅ Usar Colors
+                           width=18, anchor="e")
         label_y2.grid(row=row, column=2, padx=15, pady=3)
         self.calculated_labels[f"{field_name}_y2"] = label_y2
         

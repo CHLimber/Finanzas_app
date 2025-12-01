@@ -4,63 +4,62 @@ Modelo de datos para el Balance General
 """
 
 class BalanceGeneral:
-    """Modelo para almacenar datos del Balance General de 2 años"""
+    """Modelo para almacenar datos del Balance General de 2 anos"""
     
     def __init__(self):
-        # ACTIVO CORRIENTE
-        self.caja_bancos_y1 = 0.0
-        self.caja_bancos_y2 = 0.0
+        # ACTIVO CORRIENTE - Ano 1 (2023)
+        self.caja_bancos_y1 = 850.0
+        self.clientes_cobrar_y1 = 1200.0
+        self.inversion_cp_y1 = 300.0
+        self.existencias_y1 = 450.0
         
-        self.clientes_cobrar_y1 = 0.0
-        self.clientes_cobrar_y2 = 0.0
+        # ACTIVO CORRIENTE - Ano 2 (2024)
+        self.caja_bancos_y2 = 1100.0
+        self.clientes_cobrar_y2 = 1600.0
+        self.inversion_cp_y2 = 500.0
+        self.existencias_y2 = 600.0
         
-        self.inversion_cp_y1 = 0.0
-        self.inversion_cp_y2 = 0.0
+        # ACTIVO NO CORRIENTE - Ano 1 (2023)
+        self.inmuebles_planta_y1 = 1200.0
+        self.depreciacion_acum_y1 = 400.0
+        self.intangibles_y1 = 800.0
+        self.depreciacion_intang_y1 = 150.0
         
-        self.existencias_y1 = 0.0
-        self.existencias_y2 = 0.0
+        # ACTIVO NO CORRIENTE - Ano 2 (2024)
+        self.inmuebles_planta_y2 = 1500.0
+        self.depreciacion_acum_y2 = 550.0
+        self.intangibles_y2 = 1200.0
+        self.depreciacion_intang_y2 = 300.0
         
-        # ACTIVO NO CORRIENTE
-        self.inmuebles_planta_y1 = 0.0
-        self.inmuebles_planta_y2 = 0.0
+        # PASIVO CORRIENTE - Ano 1 (2023)
+        self.proveedores_y1 = 300.0
+        self.impuestos_pagar_y1 = 150.0
+        self.deuda_cp_y1 = 100.0
         
-        self.depreciacion_acum_y1 = 0.0
-        self.depreciacion_acum_y2 = 0.0
+        # PASIVO CORRIENTE - Ano 2 (2024)
+        self.proveedores_y2 = 600.0
+        self.impuestos_pagar_y2 = 200.0
+        self.deuda_cp_y2 = 200.0
         
-        self.intangibles_y1 = 0.0
-        self.intangibles_y2 = 0.0
+        # PASIVO NO CORRIENTE - Ano 1 (2023)
+        self.prestamos_lp_y1 = 600.0
+        self.provisiones_lp_y1 = 100.0
         
-        self.depreciacion_intang_y1 = 0.0
-        self.depreciacion_intang_y2 = 0.0
+        # PASIVO NO CORRIENTE - Ano 2 (2024)
+        self.prestamos_lp_y2 = 900.0
+        self.provisiones_lp_y2 = 100.0
         
-        # PASIVO CORRIENTE
-        self.proveedores_y1 = 0.0
-        self.proveedores_y2 = 0.0
+        # PATRIMONIO - Ano 1 (2023)
+        self.capital_social_y1 = 1500.0
+        self.reservas_legales_y1 = 400.0
+        self.ganancias_acum_y1 = 1100.0
         
-        self.impuestos_pagar_y1 = 0.0
-        self.impuestos_pagar_y2 = 0.0
-        
-        self.deuda_cp_y1 = 0.0
-        self.deuda_cp_y2 = 0.0
-        
-        # PASIVO NO CORRIENTE
-        self.prestamos_lp_y1 = 0.0
-        self.prestamos_lp_y2 = 0.0
-        
-        self.provisiones_lp_y1 = 0.0
-        self.provisiones_lp_y2 = 0.0
-        
-        # PATRIMONIO
-        self.capital_social_y1 = 0.0
-        self.capital_social_y2 = 0.0
-        
-        self.reservas_legales_y1 = 0.0
-        self.reservas_legales_y2 = 0.0
-        
-        self.ganancias_acum_y1 = 0.0
-        self.ganancias_acum_y2 = 0.0
+        # PATRIMONIO - Ano 2 (2024)
+        self.capital_social_y2 = 1500.0
+        self.reservas_legales_y2 = 500.0
+        self.ganancias_acum_y2 = 1650.0
     
-    # MÉTODOS DE CÁLCULO AUTOMÁTICO
+    # METODOS DE CALCULO AUTOMATICO
     
     def get_total_corriente(self, year):
         """Calcula Total Activo Corriente"""

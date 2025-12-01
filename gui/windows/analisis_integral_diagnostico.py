@@ -6,6 +6,10 @@ Pestaña de Análisis Financiero - Liquidez - Solvencia
 import tkinter as tk
 from tkinter import ttk
 from config import Colors, Fonts
+from gui.windows.d1_matriz_ratios import D1MatrizRatiosTab
+from gui.windows.d2_fortalezas_debilidades import D2FortalezasDebilidadesTab
+from gui.windows.d3_resumen_integral import D3ResumenIntegralTab 
+from gui.windows.d4_recomendaciones import D4RecomendacionesTab
 
 class AnalisisIntegralTab(ttk.Frame):
     """Pestaña con subpestañas de Análisis Financiero"""
@@ -73,9 +77,17 @@ class AnalisisIntegralTab(ttk.Frame):
         self.sub_notebook.pack(fill=tk.BOTH, expand=True, padx=15, pady=10)
         
         # Crear subpestañas (adaptar según cada análisis)
-        self.crear_subpestana_d1_d2()
-        self.crear_subpestana_d3()
-        self.crear_subpestana_d4()
+        d1_tab = D1MatrizRatiosTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(d1_tab, text="D1 - Matriz Ratios")
+        
+        d2_tab = D2FortalezasDebilidadesTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(d2_tab, text="D2 - Fortalezas/Debilidades")
+
+        d3_tab = D3ResumenIntegralTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(d3_tab, text="D3 - Resumen Integral")
+
+        d4_tab = D4RecomendacionesTab(self.sub_notebook, self.app)
+        self.sub_notebook.add(d4_tab, text="D4 - Recomendaciones Estratégicas")
         
         # Marcar como actualizado
         self.datos_desactualizados = False
@@ -102,38 +114,4 @@ class AnalisisIntegralTab(ttk.Frame):
         except Exception as e:
             print(f"❌ Error: {e}")
         
-    def crear_subpestana_d1_d2(self):
-        """Subpestaña B1, B2 y B3"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="B1 - B2 - B3")
-        
-        content = ttk.Label(
-            tab,
-            text="B1, B2 y B3\n(Análisis de Liquidez)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)
     
-    def crear_subpestana_d3(self):
-        """Subpestaña B4 y B5"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="B4 - B5")
-        
-        content = ttk.Label(
-            tab,
-            text="B4 y B5\n(Análisis de Solvencia)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)
-
-    def crear_subpestana_d4(self):
-        """Subpestaña B4 y B5"""
-        tab = ttk.Frame(self.sub_notebook)
-        self.sub_notebook.add(tab, text="B4 - B5")
-        
-        content = ttk.Label(
-            tab,
-            text="B4 y B5\n(Análisis de Solvencia)",
-            font=("Arial", 12)
-        )
-        content.pack(expand=True)
